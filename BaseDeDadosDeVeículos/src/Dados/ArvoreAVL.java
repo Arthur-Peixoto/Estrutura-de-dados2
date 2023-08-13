@@ -1,34 +1,68 @@
 package Dados;
 
-public class ArvoreAVL {
-	private No root = null;
+public class ArvoreAVL<T extends Comparable<T>> {
+    private No<T> raiz = null;
 
-    public void inserir(int chave, String valor) {
-        root = inserir(root, chave, valor);
+    public void inserir(T chave, String valor) {
+        raiz = inserir(raiz, chave, valor);
     }
 
-    private No inserir(No arv, int chave, String valor) {
+    private No<T> inserir(No<T> arv, T chave, String valor) {
         if (arv == null) {
-            return new No(chave, valor);
+            return new No<>(chave, valor);
         }
 
-        if (chave < arv.chave) {
+        if (chave.compareTo(arv.chave) < 0) {
             arv.esq = inserir(arv.esq, chave, valor);
-        } else if (chave > arv.chave) {
+        } else if (chave.compareTo(arv.chave) > 0) {
             arv.dir = inserir(arv.dir, chave, valor);
         } else {
-            // Chaves duplicadas não são inseridas
-            return arv;
+            return arv; // Chaves duplicadas não são inseridas
         }
 
-        // Atualiza a altura do nó
+        // Atualiza a altura do nó atual
         arv.alturaNo = 1 + Math.max(altura(arv.esq), altura(arv.dir));
 
-        // Verifica e realiza as rotações se necessário
-        return balancear(arv);
+        // Calcula o fator de balanceamento
+        int fb = obterFB(arv);
+
+        // Realiza as rotações e balanceamento, caso necessário
+        if (fb > 1) {
+            if (chave.compareTo(arv.esq.chave) < 0) {
+                return rotacaoDireitaSimples(arv);
+            } else {
+                arv.esq = rotacaoEsquerdaSimples(arv.esq);
+                return rotacaoDireitaSimples(arv);
+            }
+        }
+        if (fb < -1) {
+            if (chave.compareTo(arv.dir.chave) > 0) {
+                return rotacaoEsquerdaSimples(arv);
+            } else {
+                arv.dir = rotacaoDireitaSimples(arv.dir);
+                return rotacaoEsquerdaSimples(arv);
+            }
+        }
+
+        return arv;
     }
-    
-    private No balancear(No n) {
+
+    private int altura(No<T> no) {
+        if (no == null) {
+            return -1;
+        }
+        return no.alturaNo;
+    }
+
+    private int obterFB(No<T> no) {
+        if (no == null) {
+            return 0;
+        }
+        return altura(no.esq) - altura(no.dir);
+    }
+
+
+    private No<T> balancear(No<T> n) {
         int fb = obterFB(n);
 
         if (fb > 1) {
@@ -50,9 +84,9 @@ public class ArvoreAVL {
         return n;
     }
 
-    private No rotacaoDireitaSimples(No y) {
-        No x = y.esq;
-        No T2 = x.dir;
+    private No<T> rotacaoDireitaSimples(No<T> y) {
+        No<T> x = y.esq;
+        No<T> T2 = x.dir;
 
         x.dir = y;
         y.esq = T2;
@@ -63,9 +97,9 @@ public class ArvoreAVL {
         return x;
     }
 
-    private No rotacaoEsquerdaSimples(No x) {
-        No y = x.dir;
-        No T2 = y.esq;
+    private No<T> rotacaoEsquerdaSimples(No<T> x) {
+        No<T> y = x.dir;
+        No<T> T2 = y.esq;
 
         y.esq = x;
         x.dir = T2;
@@ -76,37 +110,63 @@ public class ArvoreAVL {
         return y;
     }
 
-    public void remover(int chave) {
-        root = remover(root, chave);
+    public void remover(T chave) {
+        raiz = remover(raiz, chave);
     }
 
-    private No remover(No arv, int chave) {
-        // Implemente a lógica de remoção
-        // ...
+    private No<T> remover(No<T> arv, T chave) {
+    	if (arv == null) {
+            return null;
+        }
 
-        // Atualiza a altura do nó
+        if (chave.compareTo(arv.chave) < 0) {
+            arv.esq = remover(arv.esq, chave);
+        } else if (chave.compareTo(arv.chave) > 0) {
+            arv.dir = remover(arv.dir, chave);
+        } else {
+            if (arv.esq == null || arv.dir == null) {
+                arv = (arv.esq != null) ? arv.esq : arv.dir;
+            } else {
+                No<T> sucessor = noMenorChave(arv.dir);
+                arv.chave = sucessor.chave;
+                arv.valor = sucessor.valor;
+                arv.dir = remover(arv.dir, sucessor.chave);
+            }
+        }
+
+        if (arv == null) {
+            return arv;
+        }
+
         arv.alturaNo = 1 + Math.max(altura(arv.esq), altura(arv.dir));
 
-        // Balancear a árvore após a remoção, se necessário
-        return balancear(arv);
-    }
+        int fb = obterFB(arv);
 
-    // Restante dos m	étodos, incluindo os de remoção e rotações
-    // ...
-
-    // Funções auxiliares
-    private int altura(No n) {
-        if (n == null) {
-            return -1;
+        if (fb > 1) {
+            if (obterFB(arv.esq) >= 0) {
+                return rotacaoDireitaSimples(arv);
+            } else {
+                arv.esq = rotacaoEsquerdaSimples(arv.esq);
+                return rotacaoDireitaSimples(arv);
+            }
         }
-        return n.alturaNo;
-    }
-
-    private int obterFB(No n) {
-        if (n == null) {
-            return 0;
+        if (fb < -1) {
+            if (obterFB(arv.dir) <= 0) {
+                return rotacaoEsquerdaSimples(arv);
+            } else {
+                arv.dir = rotacaoDireitaSimples(arv.dir);
+                return rotacaoEsquerdaSimples(arv);
+            }
         }
-        return altura(n.esq) - altura(n.dir);
-    }
 
+        return arv;
+    }
+    
+    private No<T> noMenorChave(No<T> arv) {
+        if (arv == null || arv.esq == null) {
+            return arv;
+        }
+        return noMenorChave(arv.esq);
+    }
+    
 }

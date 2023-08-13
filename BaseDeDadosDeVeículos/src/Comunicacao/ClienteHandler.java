@@ -1,41 +1,26 @@
 package Comunicacao;
-//Exemplo de um tratador de cliente (ClientHandler) para o servidor
-import java.io.*;
-import java.net.*;
 
-public class ClienteHandler extends Thread implements Runnable {
- private Socket clientSocket;
+import java.io.IOException;
+import java.net.Socket;
 
- public ClienteHandler(Socket clientSocket) {
-     this.clientSocket = clientSocket;
- }
+import Dados.ArvoreAVL;
 
- @Override
- public void run() {
-     try {
-         BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-         PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true);
+public class ClienteHandler extends Thread {
+    private Socket clientSocket;
+    private ArvoreAVL arvoreVeiculos;
 
-         boolean clienteConnected = true;
-         while (clienteConnected) {
-             String messageFromClient = reader.readLine();
-             if (messageFromClient == null) {
-                 // Se a mensagem for nula, significa que o cliente encerrou a conexão
-                 clienteConnected = false;
-             } else {
-                 System.out.println("Mensagem recebida do cliente: " + messageFromClient);
+    public ClienteHandler(Socket clientSocket, ArvoreAVL arvoreVeiculos) {
+        this.clientSocket = clientSocket;
+        this.arvoreVeiculos = arvoreVeiculos;
+    }
 
-                 // Exemplo de escrita de mensagem para o cliente
-                 writer.println("Resposta do servidor para o cliente: " + messageFromClient);
-             }
-         }
-
-         // Fechar os fluxos e a conexão do cliente
-         writer.close();
-         reader.close();
-         clientSocket.close();
-     } catch (IOException e) {
-         e.printStackTrace();
-     }
- }
+    @Override
+    public void run() {
+        try {
+            Protocolo protocolo = new Protocolo(clientSocket, arvoreVeiculos);
+            protocolo.iniciarProtocolo();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
