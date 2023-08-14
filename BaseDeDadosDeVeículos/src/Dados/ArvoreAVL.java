@@ -1,5 +1,7 @@
 package Dados;
 
+import Entity.Veiculo;
+
 public class ArvoreAVL<T extends Comparable<T>> {
     private No<T> raiz = null;
 
@@ -168,5 +170,15 @@ public class ArvoreAVL<T extends Comparable<T>> {
         }
         return noMenorChave(arv.esq);
     }
+
+	public boolean atualizar(T chave, String novoValor) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public T buscar(T chave) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
 }

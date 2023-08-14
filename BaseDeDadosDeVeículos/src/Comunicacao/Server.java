@@ -1,29 +1,39 @@
 package Comunicacao;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import Dados.ArvoreAVL;
+import Entity.Veiculo;
 
 public class Server {
-    public static void main(String[] args) {
-        try {
-            ServerSocket serverSocket = new ServerSocket(4000);
-            System.out.println("Servidor pronto e aguardando conexões...");
+    private ArvoreAVL<String> arvoreVeiculos;
 
-            boolean serverRunning = true;
-            while (serverRunning) {
-                Socket clientSocket = serverSocket.accept();
-                System.out.println("Cliente conectado: " + clientSocket.getInetAddress());
+    public Server() {
+        arvoreVeiculos = new ArvoreAVL<>();
+        // Inicializar a árvore com dados iniciais, se necessário
+    }
 
-                // Cria uma nova thread para tratar a conexão do cliente
-                ClienteHandler clienteThread = new ClienteHandler(clientSocket);
-                clienteThread.start();
-            }
+    public Veiculo consultarVeiculo(String renavam) {
+        return arvoreVeiculos.buscar(renavam);
+    }
 
-            // Fechar o servidor quando a condição de parada for atendida
-            serverSocket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public boolean cadastrarVeiculo(Veiculo veiculo) {
+        arvoreVeiculos.inserir(veiculo.getRenavam(), veiculo);
+        return true; // Ou retorne false em caso de falha no cadastro
+    }
+
+    public void removerVeiculo(Veiculo veiculo) {
+        arvoreVeiculos.remover(veiculo.getRenavam());
+    }
+
+    public void listarVeiculos() {
+        arvoreVeiculos.percursoEmOrdem();
+    }
+
+    public int getQntVeiculos() {
+        return arvoreVeiculos.getQuantidade();
+    }
+
+    public String encerrarConexao() {
+        // Implementar lógica para encerrar a conexão, se necessário
+        return "Conexão encerrada.";
     }
 }
