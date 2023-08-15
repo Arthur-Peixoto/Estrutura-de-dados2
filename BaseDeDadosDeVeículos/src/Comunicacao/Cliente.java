@@ -22,7 +22,7 @@ public class Cliente {
         while (executando) {
             exibirMenu();
             int opcao = scanner.nextInt();
-            scanner.nextLine(); // Consumir a quebra de linha
+            scanner.nextLine(); 
 
             switch (opcao) {
                 case 1:
@@ -149,7 +149,7 @@ public class Cliente {
         String CpfCondutor = scanner.nextLine();
         System.out.print("Nome do condutor: ");
         String Nomecondutor = scanner.nextLine();
-        Veiculo novoVeiculo = new Veiculo(Placa,novoRenavam, marca, modelo, new Condutor(Nomecondutor,CpfCondutor));
+        Veiculo novoVeiculo = new Veiculo(novoRenavam,Placa, marca, modelo, new Condutor(Nomecondutor,CpfCondutor));
         if (protocolo.cadastrarVeiculo(novoVeiculo)) {
             System.out.println("Veículo cadastrado com sucesso.");
         } else {
@@ -169,6 +169,7 @@ public class Cliente {
             String novoCPF = scanner.nextLine();
             System.out.print("Nome do condutor: ");
             String novoNome = scanner.nextLine();
+            System.out.print("Data de fabricação: ");
             String novaData = scanner.nextLine();
             veiculoAlteracao.setDataFabricacao(novaData);
             veiculoAlteracao.setModelo(novoModelo);

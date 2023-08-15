@@ -1,1 +1,102 @@
-
+Altura da árvore: 1
+Rotações à Esquerda: 0, Rotações à Direita: 0
+Altura da árvore: 1
+Rotações à Esquerda: 1, Rotações à Direita: 0
+Altura da árvore: 1
+Rotações à Esquerda: 2, Rotações à Direita: 1
+Altura da árvore: 2
+Rotações à Esquerda: 2, Rotações à Direita: 2
+Altura da árvore: 2
+Rotações à Esquerda: 3, Rotações à Direita: 3
+Altura da árvore: 2
+Rotações à Esquerda: 4, Rotações à Direita: 4
+Altura da árvore: 2
+Rotações à Esquerda: 5, Rotações à Direita: 5
+Altura da árvore: 3
+Rotações à Esquerda: 5, Rotações à Direita: 6
+Altura da árvore: 3
+Rotações à Esquerda: 6, Rotações à Direita: 7
+Altura da árvore: 3
+Rotações à Esquerda: 8, Rotações à Direita: 7
+Altura da árvore: 3
+Rotações à Esquerda: 9, Rotações à Direita: 7
+Altura da árvore: 3
+Rotações à Esquerda: 9, Rotações à Direita: 8
+Altura da árvore: 3
+Rotações à Esquerda: 11, Rotações à Direita: 9
+Altura da árvore: 4
+Rotações à Esquerda: 11, Rotações à Direita: 10
+Altura da árvore: 4
+Rotações à Esquerda: 13, Rotações à Direita: 11
+Altura da árvore: 4
+Rotações à Esquerda: 13, Rotações à Direita: 12
+Altura da árvore: 4
+Rotações à Esquerda: 15, Rotações à Direita: 13
+Altura da árvore: 4
+Rotações à Esquerda: 16, Rotações à Direita: 15
+Altura da árvore: 4
+Rotações à Esquerda: 17, Rotações à Direita: 15
+Altura da árvore: 4
+Rotações à Esquerda: 17, Rotações à Direita: 15
+Altura da árvore: 4
+Rotações à Esquerda: 18, Rotações à Direita: 15
+Altura da árvore: 4
+Rotações à Esquerda: 19, Rotações à Direita: 15
+Altura da árvore: 5
+Rotações à Esquerda: 20, Rotações à Direita: 15
+Altura da árvore: 5
+Rotações à Esquerda: 21, Rotações à Direita: 15
+Altura da árvore: 5
+Rotações à Esquerda: 22, Rotações à Direita: 15
+Altura da árvore: 5
+Rotações à Esquerda: 22, Rotações à Direita: 16
+Altura da árvore: 5
+Rotações à Esquerda: 23, Rotações à Direita: 16
+Altura da árvore: 5
+Rotações à Esquerda: 24, Rotações à Direita: 17
+Altura da árvore: 5
+Rotações à Esquerda: 24, Rotações à Direita: 18
+Altura da árvore: 5
+Rotações à Esquerda: 24, Rotações à Direita: 18
+Altura da árvore: 5
+Rotações à Esquerda: 24, Rotações à Direita: 18
+Altura da árvore: 5
+Rotações à Esquerda: 25, Rotações à Direita: 19
+Altura da árvore: 5
+Rotações à Esquerda: 25, Rotações à Direita: 20
+Altura da árvore: 6
+Rotações à Esquerda: 25, Rotações à Direita: 20
+Altura da árvore: 6
+Rotações à Esquerda: 25, Rotações à Direita: 20
+Altura da árvore: 6
+Rotações à Esquerda: 26, Rotações à Direita: 21
+Altura da árvore: 6
+Rotações à Esquerda: 27, Rotações à Direita: 21
+Altura da árvore: 6
+Rotações à Esquerda: 29, Rotações à Direita: 22
+Altura da árvore: 6
+Rotações à Esquerda: 29, Rotações à Direita: 23
+Altura da árvore: 6
+Rotações à Esquerda: 30, Rotações à Direita: 23
+Altura da árvore: 6
+Rotações à Esquerda: 30, Rotações à Direita: 24
+Altura da árvore: 6
+Rotações à Esquerda: 31, Rotações à Direita: 24
+Altura da árvore: 6
+Rotações à Esquerda: 32, Rotações à Direita: 24
+Altura da árvore: 6
+Rotações à Esquerda: 33, Rotações à Direita: 24
+Altura da árvore: 6
+Rotações à Esquerda: 33, Rotações à Direita: 25
+Altura da árvore: 6
+Rotações à Esquerda: 34, Rotações à Direita: 25
+Altura da árvore: 6
+Rotações à Esquerda: 35, Rotações à Direita: 27
+Altura da árvore: 6
+Rotações à Esquerda: 36, Rotações à Direita: 28
+Altura da árvore: 6
+Rotações à Esquerda: 36, Rotações à Direita: 29
+Altura da árvore: 6
+Rotações à Esquerda: 38, Rotações à Direita: 30
+Altura da árvore: 6
+Rotações à Esquerda: 39, Rotações à Direita: 30

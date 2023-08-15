@@ -41,7 +41,7 @@ public class Veiculo {
 	}
 
 	public void setCondutor(String nome, String cpf) {
-		this.condutor = condutor;
+		this.condutor = new Condutor(nome, cpf);
 	}
 
 	private Condutor condutor;

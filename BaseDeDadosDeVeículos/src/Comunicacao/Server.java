@@ -9,7 +9,6 @@ public class Server {
 
     public Server() {
         arvoreVeiculos = new ArvoreAVL<>();
-        // Inicializar a árvore com dados iniciais, se necessário
     }
 
     public Veiculo consultarVeiculo(String renavam) {
@@ -20,7 +19,7 @@ public class Server {
 
     public boolean cadastrarVeiculo(Veiculo veiculo) {
         arvoreVeiculos.inserir(veiculo.getRenavam(), veiculo);
-        return true; // Ou retorne false em caso de falha no cadastro
+        return true; 
     }
 
     public void removerVeiculo(Veiculo veiculo) {
