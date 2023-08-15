@@ -1,26 +1,58 @@
 package Dados;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import Entity.Veiculo;
 
-public class ArvoreAVL<T extends Comparable<T>> {
-    private No<T> raiz = null;
+public class ArvoreAVL<T> {
+    No<T> raiz = null;
+    int rotEsq = 0;
+    int rotDir = 0;
 
-    public void inserir(T chave, String valor) {
-        raiz = inserir(raiz, chave, valor);
+    public int getRotEsq() {
+		return rotEsq;
+	}
+
+	public void setRotEsq(int rotEsq) {
+		this.rotEsq = rotEsq;
+	}
+
+	public int getRotDir() {
+		return rotDir;
+	}
+
+	public void setRotDir(int rotDir) {
+		this.rotDir = rotDir;
+	}
+
+	public No<T> getRaiz() {
+		return raiz;
+	}
+
+	public void setRaiz(No<T> raiz) {
+		this.raiz = raiz;
+	}
+
+	public void inserir(String chave, T veiculo) {
+        raiz = inserir(this.getRaiz(), chave, veiculo);
+        gravarLog();
     }
 
-    private No<T> inserir(No<T> arv, T chave, String valor) {
-        if (arv == null) {
-            return new No<>(chave, valor);
-        }
+	private No<T> inserir(No<T> arv, String chave, T valor) {
+	    if (arv == null) {
+	        return new No<T>(chave, valor);
+	    }
 
-        if (chave.compareTo(arv.chave) < 0) {
-            arv.esq = inserir(arv.esq, chave, valor);
-        } else if (chave.compareTo(arv.chave) > 0) {
-            arv.dir = inserir(arv.dir, chave, valor);
-        } else {
-            return arv; // Chaves duplicadas não são inseridas
-        }
+	    if (chave.compareTo(arv.getChave()) < 0) {
+	        arv.esq = inserir(arv.esq, chave, valor);
+	    } else if (chave.compareTo(arv.getChave()) > 0) {
+	        arv.dir = inserir(arv.dir, chave, valor);
+	    } else {
+	        return arv; // Chaves duplicadas não são inseridas
+	    }
+	    
 
         // Atualiza a altura do nó atual
         arv.alturaNo = 1 + Math.max(altura(arv.esq), altura(arv.dir));
@@ -30,21 +62,21 @@ public class ArvoreAVL<T extends Comparable<T>> {
 
         // Realiza as rotações e balanceamento, caso necessário
         if (fb > 1) {
-            if (chave.compareTo(arv.esq.chave) < 0) {
+            if (chave.compareTo(arv.esq.getChave()) < 0) {
                 return rotacaoDireitaSimples(arv);
             } else {
                 arv.esq = rotacaoEsquerdaSimples(arv.esq);
                 return rotacaoDireitaSimples(arv);
             }
-        }
-        if (fb < -1) {
-            if (chave.compareTo(arv.dir.chave) > 0) {
+        } else if (fb < -1) {
+            if (chave.compareTo(arv.dir.getChave()) > 0) {
                 return rotacaoEsquerdaSimples(arv);
             } else {
                 arv.dir = rotacaoDireitaSimples(arv.dir);
                 return rotacaoEsquerdaSimples(arv);
             }
         }
+
 
         return arv;
     }
@@ -87,6 +119,12 @@ public class ArvoreAVL<T extends Comparable<T>> {
     }
 
     private No<T> rotacaoDireitaSimples(No<T> y) {
+        if (y == null || y.esq == null) {
+            return y; // Não é possível fazer rotação
+        }
+        
+        rotDir++;
+        
         No<T> x = y.esq;
         No<T> T2 = x.dir;
 
@@ -100,6 +138,12 @@ public class ArvoreAVL<T extends Comparable<T>> {
     }
 
     private No<T> rotacaoEsquerdaSimples(No<T> x) {
+        if (x == null || x.dir == null) {
+            return x; // Não é possível fazer rotação
+        }
+
+        rotEsq++;
+        
         No<T> y = x.dir;
         No<T> T2 = y.esq;
 
@@ -112,11 +156,12 @@ public class ArvoreAVL<T extends Comparable<T>> {
         return y;
     }
 
-    public void remover(T chave) {
+    public void remover(String chave) {
         raiz = remover(raiz, chave);
+        gravarLog();
     }
 
-    private No<T> remover(No<T> arv, T chave) {
+    private No<T> remover(No<T> arv, String chave) {
     	if (arv == null) {
             return null;
         }
@@ -171,14 +216,67 @@ public class ArvoreAVL<T extends Comparable<T>> {
         return noMenorChave(arv.esq);
     }
 
-	public boolean atualizar(T chave, String novoValor) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public boolean atualizar(String chave, T novoValor) {
+        No<T> no = buscar(chave);
+        if (no != null) {
+            no.valor = novoValor;
+            return true;
+        }
+        return false; // Caso a chave não seja encontrada
+    }
 
-	public T buscar(T chave) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public No<T> buscar(String chaveBusca) {
+        return this.buscar(this.getRaiz(), chaveBusca);
+    }
+
+    private No<T> buscar(No<T> arv, String chaveBusca) {
+        if (arv == null) {
+            return null;
+        }
+
+        if (chaveBusca.compareTo(arv.chave) < 0) {
+            return buscar(arv.esq, chaveBusca);
+        } else if (chaveBusca.compareTo(arv.chave) > 0) {
+            return buscar(arv.dir, chaveBusca);
+        } else {
+            return arv;
+        }
+    }
     
+    public int getQuantidade() {
+        return getQuantidade(raiz);
+    }
+
+    private int getQuantidade(No<T> arv) {
+        if (arv == null) {
+            return 0;
+        }
+        return 1 + getQuantidade(arv.esq) + getQuantidade(arv.dir);
+    }
+
+    public void percursoEmOrdem() {
+        percursoEmOrdem(raiz);
+    }
+
+    private void percursoEmOrdem(No<T> no) {
+        if (no != null) {
+            percursoEmOrdem(no.esq);
+            System.out.println(no.valor + " " +  no.getValor()); // Ou realize outra operação com o valor do nó
+            percursoEmOrdem(no.dir);
+        }
+    }
+    
+    public void gravarLog() {
+        try {
+        	String caminhoArquivo = "data/log.txt";
+            BufferedWriter writer = new BufferedWriter(new FileWriter(caminhoArquivo, true));
+            writer.write("Altura da árvore: " + altura(raiz));
+            writer.newLine();
+            writer.write("Rotações à Esquerda: " + rotEsq + ", Rotações à Direita: " + rotDir);
+            writer.newLine();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

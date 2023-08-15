@@ -1,10 +1,11 @@
 package Comunicacao;
 
 import Dados.ArvoreAVL;
+import Dados.No;
 import Entity.Veiculo;
 
 public class Server {
-    private ArvoreAVL<String> arvoreVeiculos;
+    private ArvoreAVL<Veiculo> arvoreVeiculos;
 
     public Server() {
         arvoreVeiculos = new ArvoreAVL<>();
@@ -12,7 +13,9 @@ public class Server {
     }
 
     public Veiculo consultarVeiculo(String renavam) {
-        return arvoreVeiculos.buscar(renavam);
+    	No<Veiculo> no = arvoreVeiculos.buscar(renavam);
+    	Veiculo v = no.getValor();
+        return v;
     }
 
     public boolean cadastrarVeiculo(Veiculo veiculo) {
@@ -30,6 +33,14 @@ public class Server {
 
     public int getQntVeiculos() {
         return arvoreVeiculos.getQuantidade();
+    }
+    
+    public int getRotDir() {
+    	return arvoreVeiculos.getRotDir();
+    }
+    
+    public int getRotEsq() {
+    	return arvoreVeiculos.getRotEsq();
     }
 
     public String encerrarConexao() {

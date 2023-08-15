@@ -1,6 +1,7 @@
 package Comunicacao;
 
 import Dados.ArvoreAVL;
+import Dados.No;
 import Entity.Veiculo;
 
 import java.io.BufferedReader;
@@ -27,7 +28,7 @@ public class Protocolo {
 	}
 	
 	public void removerVeiculo(Veiculo veiculo) {
-		return servidor.removerVeiculo(veiculo);
+		servidor.removerVeiculo(veiculo);
 	}
 	
 	public void listarVeiculos() {
@@ -42,5 +43,4 @@ public class Protocolo {
 		System.out.println("Protocolo encerrado");
 		return servidor.encerrarConexao();
 	}
-  
 }

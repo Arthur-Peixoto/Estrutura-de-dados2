@@ -18,22 +18,6 @@ public class Veiculo {
 		this.renavam = renavam;
 	}
 
-	public String getNomeCondutor() {
-		return nomeCondutor;
-	}
-
-	public void setNomeCondutor(String nomeCondutor) {
-		this.nomeCondutor = nomeCondutor;
-	}
-
-	public String getCpfCondutor() {
-		return cpfCondutor;
-	}
-
-	public void setCpfCondutor(String cpfCondutor) {
-		this.cpfCondutor = cpfCondutor;
-	}
-
 	public String getModelo() {
 		return modelo;
 	}
@@ -51,18 +35,35 @@ public class Veiculo {
 	}
 
 	private String renavam;
-    private String nomeCondutor;
-    private String cpfCondutor;
+	
+    public Condutor getCondutor() {
+		return condutor;
+	}
+
+	public void setCondutor(String nome, String cpf) {
+		this.condutor = condutor;
+	}
+
+	private Condutor condutor;
     private String modelo;
     private String dataFabricacao;
 
-    public Veiculo(String placa, String renavam, String nomeCondutor, String cpfCondutor, String modelo, String dataFabricacao) {
+    public Veiculo(String renavam, String placa, String modelo, String dataFabricacao, Condutor condutor) {
         this.placa = placa;
         this.renavam = renavam;
-        this.nomeCondutor = nomeCondutor;
-        this.cpfCondutor = cpfCondutor;
+        this.condutor = condutor;
         this.modelo = modelo;
         this.dataFabricacao = dataFabricacao;
     }
 
+    public String toString() {
+        return "Veiculo{" +
+                "placa='" + placa + '\'' +
+                ", renavam='" + renavam + '\'' +
+                 condutor +
+                ", modelo='" + modelo + '\'' +
+                ", Data de fabricação=" + dataFabricacao +
+                '}';
+    }
+    
 }

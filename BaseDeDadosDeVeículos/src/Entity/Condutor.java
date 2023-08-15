@@ -25,4 +25,8 @@ public class Condutor {
         this.cpf = cpf;
     }
     
+    @Override
+    public String toString() {
+        return "Condutor: [nome=" + nome + ", cpf=" + cpf + "]";
+    }
 }
