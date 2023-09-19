@@ -1,7 +1,7 @@
-package Comunicacao;
+package pratica1.Comunicacao;
 
-import Entity.Condutor;
-import Entity.Veiculo;
+import pratica1.Entity.Condutor;
+import pratica1.Entity.Veiculo;
 
 import java.util.Scanner;
 

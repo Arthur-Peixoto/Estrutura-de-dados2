@@ -1,6 +1,6 @@
-package Dados;
+package pratica1.Dados;
 
-import Entity.Veiculo;
+import pratica1.Entity.Veiculo;
 
 public class No<T> implements Comparable<String> {
     String chave;

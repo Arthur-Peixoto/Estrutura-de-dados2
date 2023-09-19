@@ -1,4 +1,4 @@
-package Entity;
+package pratica1.Entity;
 
 public class Veiculo {
     private String placa;

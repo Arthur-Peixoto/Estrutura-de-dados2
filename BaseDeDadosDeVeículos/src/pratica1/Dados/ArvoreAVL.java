@@ -1,10 +1,10 @@
-package Dados;
+package pratica1.Dados;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import Entity.Veiculo;
+import pratica1.Entity.Veiculo;
 
 public class ArvoreAVL<T> {
     No<T> raiz = null;

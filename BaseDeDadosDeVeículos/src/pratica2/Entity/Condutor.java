@@ -1,4 +1,4 @@
-package Entity;
+package pratica2.Entity;
 
 public class Condutor {
     private String nome;

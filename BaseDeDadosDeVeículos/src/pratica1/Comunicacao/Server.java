@@ -1,8 +1,8 @@
-package Comunicacao;
+package pratica1.Comunicacao;
 
-import Dados.ArvoreAVL;
-import Dados.No;
-import Entity.Veiculo;
+import pratica1.Dados.ArvoreAVL;
+import pratica1.Dados.No;
+import pratica1.Entity.Veiculo;
 
 public class Server {
     private ArvoreAVL<Veiculo> arvoreVeiculos;

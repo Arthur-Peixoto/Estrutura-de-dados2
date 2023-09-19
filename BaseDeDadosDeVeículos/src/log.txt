@@ -1,0 +1,2 @@
+
+Servidor:	qntVei=52	fatorCarga=1.130434782609

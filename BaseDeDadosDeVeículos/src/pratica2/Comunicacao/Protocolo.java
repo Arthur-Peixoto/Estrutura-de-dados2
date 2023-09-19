@@ -1,8 +1,9 @@
-package Comunicacao;
+package pratica2.Comunicacao;
 
-import Dados.ArvoreAVL;
-import Dados.No;
-import Entity.Veiculo;
+import pratica2.Dados.EnderecamentoAberto;
+import pratica2.Dados.EncadeamentoExterior;
+import pratica2.Dados.No;
+import pratica2.Entity.Veiculo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,13 +14,14 @@ import java.util.Scanner;
 
 public class Protocolo {
 	
-	Server servidor = new Server();
+	Server servidor;
 	
-	public Protocolo(String mensagem) {
+	public Protocolo(String mensagem, int tam) {
 		System.out.println(mensagem);
+		servidor = new Server(tam);
 	}
 	
-	public Veiculo buscarVeiculos(String renavam) {
+	public Veiculo buscarVeiculos(Integer renavam) {
 		return servidor.consultarVeiculo(renavam);
 	}
 	
@@ -28,19 +30,21 @@ public class Protocolo {
 	}
 	
 	public void removerVeiculo(Veiculo veiculo) {
-		servidor.removerVeiculo(veiculo);
+		int renavam = veiculo.getRenavam();
+		servidor.removerVeiculo(renavam);
 	}
 	
 	public void listarVeiculos() {
 		servidor.listarVeiculos();
 	}
 	
-	public int qntVeiculos() {
-		return servidor.getQntVeiculos();
-	}
-	
 	public String encerrarConexao() {
 		System.out.println("Protocolo encerrado");
 		return servidor.encerrarConexao();
+	}
+
+	public int qntVeiculos() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
